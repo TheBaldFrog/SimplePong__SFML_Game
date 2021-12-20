@@ -5,7 +5,7 @@ Bat::Bat(float startX, float startY)
 	m_Position.x = startX;
 	m_Position.y = startY;
 
-	m_Shape.setSize(sf::Vector2f(340, 5));
+	m_Shape.setSize(sf::Vector2f(340, 10));
 	m_Shape.setPosition(m_Position);
 	m_Shape.setFillColor(Color::White);
 }
@@ -41,6 +41,11 @@ void Bat::stopLeft()
 void Bat::stopRight()
 {
 	m_MovingRight = false;
+}
+
+void Bat::setPosition(Vector2f pos)
+{
+	m_Position = pos;
 }
 
 void Bat::update(Time dt)

@@ -32,6 +32,7 @@ float Ball::getSpeed()
 void Ball::reboundSides()
 {
 	m_DirectionX = -m_DirectionX;
+
 }
 
 void Ball::reboundBatOrTop()

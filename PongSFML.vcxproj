@@ -130,6 +130,7 @@
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>C:\Users\Lius\Documents\libs\SFML-2.5.1\include</AdditionalIncludeDirectories>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
@@ -139,6 +140,9 @@
       <AdditionalDependencies>C:\Users\Lius\Documents\libs\SFML-2.5.1\lib\openal32.lib;C:\Users\Lius\Documents\libs\SFML-2.5.1\lib\sfml-audio.lib;C:\Users\Lius\Documents\libs\SFML-2.5.1\lib\sfml-graphics.lib;C:\Users\Lius\Documents\libs\SFML-2.5.1\lib\sfml-system.lib;C:\Users\Lius\Documents\libs\SFML-2.5.1\lib\sfml-window.lib;C:\Users\Lius\Documents\libs\SFML-2.5.1\lib\sfml-main.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <SubSystem>Windows</SubSystem>
     </Link>
+    <ProjectReference>
+      <UseLibraryDependencyInputs>false</UseLibraryDependencyInputs>
+    </ProjectReference>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Ball.cpp" />

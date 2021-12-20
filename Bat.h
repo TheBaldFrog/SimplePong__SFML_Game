@@ -24,5 +24,7 @@ public:
 	void stopLeft();
 	void stopRight();
 
+	void setPosition(Vector2f pos);
+
 	void update(Time dt);
 };

@@ -12,6 +12,7 @@ int main()
 
 	RenderWindow window(vm, "Pong", Style::Fullscreen);
 	window.setMouseCursorVisible(false);
+	window.setFramerateLimit(90);
 
 	int score = 0;
 	int lives = 3;
@@ -30,6 +31,9 @@ int main()
 
 	bool isDead = false;
 	bool intersect = false;
+	bool botVision = false; // false
+
+	int aceleration = 350;
 
 	Color col[15]{
 		{255,0,0},
@@ -49,6 +53,8 @@ int main()
 		{255,255,255}
 	};
 	int colCont = 0;
+
+	bool acceptInput = true;
 	
 	// Clock for timing everything
 	Clock clock;
@@ -60,6 +66,11 @@ int main()
 		{
 			if (event.type == Event::Closed)
 				window.close();
+
+			if (event.type == Event::KeyReleased)
+			{
+				acceptInput = true;
+			}
 		}
 
 		if (Keyboard::isKeyPressed(Keyboard::Escape))
@@ -85,14 +96,32 @@ int main()
 			bat.stopRight();
 		}
 
+		if (acceptInput)
+		{
+			if (Keyboard::isKeyPressed(Keyboard::B))
+			{
+				//ball.setSpeed(0);
+				if (botVision)
+					botVision = false;
+				else
+					botVision = true;
+				acceptInput = false;
+			}
+		}
+
+		if (botVision)
+		{
+			bat.setPosition(Vector2f(ball.getPosition().left - bat.getPosition().width / 2 + ball.getPosition().width/2
+				, bat.getPosition().top));
+		}
+
 		// Update the bat and the HUD
 		Time dt = clock.restart(); // Update the delta time
 		bat.update(dt);
 		ball.update(dt);
 		// Update the HUD
 		std::stringstream ss;
-		ss << "Score:" << score << "  Lives:" << lives; 
-		//<< " Speed: " << ball.getSpeed();
+		ss << "Score:" << score << "  Lives:" << lives << " Speed: " << ball.getSpeed();
 		hud.setString(ss.str());
 
 		// Handle ball hitting the bottom
@@ -160,7 +189,22 @@ int main()
 			ball.reboundBatOrTop();
 			if (!intersect)
 			{
-				ball.setSpeed(ball.getSpeed() + 350);
+				if (ball.getSpeed() > 6000)
+					aceleration = 100;
+				if (ball.getSpeed() > 10000)
+					aceleration = 50;
+				if (ball.getSpeed() > 11000)
+					aceleration = 0;
+				/*if (ball.getSpeed() > 15000)
+					aceleration = 20;
+				if (ball.getSpeed() > 18000)
+					aceleration = 10;
+				if (ball.getSpeed() > 20000)
+					aceleration = 1;
+				if (ball.getSpeed() > 21000)
+					aceleration = 0;*/
+
+				ball.setSpeed(ball.getSpeed() + aceleration);
 				intersect = true;
 			}
 		}
