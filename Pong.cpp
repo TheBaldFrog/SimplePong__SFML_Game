@@ -92,6 +92,14 @@ int main()
 	bufferNotification.loadFromFile("sound/mixkit-unlock-game-notification-253.wav");
 	Sound soundNotification(bufferNotification);
 	bool isSoundNotification = true;
+
+	SoundBuffer bufferFail;
+	bufferFail.loadFromFile("sound/404743__owlstorm__retro-video-game-sfx-fail.wav");
+	Sound soundFail(bufferFail);
+
+	SoundBuffer bufferLose;
+	bufferLose.loadFromFile("sound/350984__cabled-mess__lose-c-03.wav");
+	Sound soundLose(bufferLose);
 	
 	// Snow falling
 	unsigned int elapsed = 0;		// Elapsed time since last snowflake spawn
@@ -194,6 +202,9 @@ int main()
 			if (lives < 1)
 			{
 				score = 0;
+				theme.stop();
+				soundLose.play();
+
 				std::chrono::seconds dura(2);
 				std::this_thread::sleep_for(dura);
 				window.close();
@@ -201,6 +212,8 @@ int main()
 
 			ball.setSpeed(600);
 			isDead = true;
+
+			soundFail.play();
 		}
 
 		// Handle ball hitting top
